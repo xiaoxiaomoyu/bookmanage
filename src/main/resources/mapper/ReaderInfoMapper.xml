@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.dao.ReaderInfoDao">
+    <select id="getAllReaderInfo" resultType="ReaderInfo">
+        SELECT * FROM reader_info
+    </select>
+
+    <select id="findReaderInfoByReaderId" resultType="ReaderInfo">
+        SELECT * FROM reader_info WHERE reader_id = #{readerId}
+    </select>
+
+    <delete id="deleteReaderInfo">
+        DELETE FROM reader_info WHERE reader_id = #{readerId}
+    </delete>
+
+    <update id="editReaderInfo" parameterType="ReaderInfo">
+        UPDATE reader_info SET
+                               name = #{name}, sex = #{sex}, birth = #{birth},
+                               address = #{address}, telcode = #{telcode}
+        WHERE reader_id = #{readerId}
+    </update>
+
+    <insert id="addReaderInfo" parameterType="ReaderInfo">
+        INSERT INTO reader_info
+        VALUES(#{readerId}, #{name}, #{sex}, #{birth}, #{address}, #{telcode})
+    </insert>
+</mapper>

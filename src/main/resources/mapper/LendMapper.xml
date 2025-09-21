@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.dao.LendDao">
+    <update id="bookReturnOne">
+        UPDATE lend_list SET back_date = NOW()
+        WHERE book_id = #{bookId} AND back_date IS NULL
+    </update>
+
+    <update id="bookReturnTwo">
+        UPDATE book_info SET state = 1 WHERE book_id = #{bookId}
+    </update>
+
+    <insert id="bookLendOne">
+        INSERT INTO lend_list (book_id, reader_id, lend_date)
+        VALUES (#{bookId}, #{readerId}, NOW())
+    </insert>
+
+    <update id="bookLendTwo">
+        UPDATE book_info SET state = 0 WHERE book_id = #{bookId}
+    </update>
+
+    <select id="lendList" resultType="Lend">
+        SELECT * FROM lend_list
+    </select>
+
+    <select id="myLendList" resultType="Lend">
+        SELECT * FROM lend_list WHERE reader_id = #{readerId}
+    </select>
+</mapper>

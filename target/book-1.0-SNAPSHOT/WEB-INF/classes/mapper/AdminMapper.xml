@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.dao.AdminDao">
+    <!-- 管理员登录验证 -->
+    <select id="getMatchCount" resultType="int">
+        SELECT COUNT(*) FROM admin
+        WHERE username = #{username} AND password = #{passwd}
+<!--        AND status = 1 &lt;!&ndash; 新增状态检查，1表示可用 &ndash;&gt;-->
+    </select>
+
+    <!-- 密码修改 -->
+    <update id="rePassword" parameterType="map">
+        UPDATE admin SET
+        password = #{newPasswd},
+        update_time = NOW() <!-- 记录更新时间 -->
+        WHERE admin_id = #{adminId}
+        <if test="oldPasswd != null">
+            AND password = #{oldPasswd} <!-- 可选：旧密码验证 -->
+        </if>
+    </update>
+
+    <!-- 获取加密后的密码 -->
+    <select id="getPasswd" resultType="string">
+        SELECT password FROM admin
+        WHERE admin_id = #{id}
+    </select>
+
+    <!-- 以下为新增的常用管理功能 -->
+    <!-- 获取管理员基本信息 -->
+    <select id="getAdminInfo" resultType="map">
+        SELECT admin_id, name, role FROM admin
+        WHERE admin_id = #{adminId}
+    </select>
+
+    <!-- 记录登录日志 -->
+    <insert id="recordLoginLog">
+        INSERT INTO admin_login_log (admin_id, login_ip, login_time)
+        VALUES (#{adminId}, #{loginIp}, NOW())
+    </insert>
+</mapper>

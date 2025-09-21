@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.book.dao.BookDao">
+    <select id="matchBook" resultType="int">
+        SELECT count(*) FROM book_info
+        WHERE book_id LIKE CONCAT('%', #{searchWord}, '%')
+           OR name LIKE CONCAT('%', #{searchWord}, '%')
+    </select>
+
+    <select id="queryBook" resultType="Book">
+        SELECT * FROM book_info
+        WHERE book_id LIKE CONCAT('%', #{searchWord}, '%')
+           OR name LIKE CONCAT('%', #{searchWord}, '%')
+    </select>
+
+    <select id="getAllBooks" resultType="Book">
+        SELECT * FROM book_info
+    </select>
+
+    <delete id="deleteBook">
+        DELETE FROM book_info WHERE book_id = #{bookId}
+    </delete>
+
+    <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="bookId">
+        INSERT INTO book_info
+        VALUES(NULL, #{name}, #{author}, #{publish}, #{isbn},
+               #{introduction}, #{language}, #{price},
+               #{pubdate}, #{classId}, #{pressmark}, #{state})
+    </insert>
+
+    <select id="getBook" resultType="Book">
+        SELECT * FROM book_info WHERE book_id = #{bookId}
+    </select>
+
+    <update id="editBook" parameterType="Book">
+        UPDATE book_info SET
+                             name=#{name}, author=#{author}, publish=#{publish},
+                             ISBN=#{isbn}, introduction=#{introduction}, language=#{language},
+                             price=#{price}, pubdate=#{pubdate}, class_id=#{classId},
+                             pressmark=#{pressmark}, state=#{state}
+        WHERE book_id=#{bookId}
+    </update>
+</mapper>
