@@ -1,68 +1,3 @@
-# bookmanage  
-
-## Project Overview  
-bookmanage is a digital library management platform developed based on the Java Web technology stack. It primarily implements information management for library users (readers and administrators), book information queries, and borrowing-related functions, aiming to enhance library operational efficiency and user experience through informatization.  
-
-## Technology Stack  
-### Backend Technologies  
-- Core Framework: Spring Framework (Spring Core, Spring MVC, Spring Tx, Spring JDBC)  
-- Persistence Layer: MyBatis 3.5.9 (integrated with MyBatis-Spring)  
-- Programming Language: Java 8  
-- Database: MySQL 8.0.28 (connection pool management via commons-dbcp2 2.9.0)  
-- Build Tool: Maven  
-- AOP Support: AspectJ 1.9.7  
-- Testing Framework: TestNG 7.5  
-
-### Frontend Technologies  
-- View Layer: JSP, JSTL 1.2  
-- Styling Framework: Bootstrap, font-awesome  
-- Scripting: JavaScript (ES6)  
-- Servers: Tomcat 9.0.24, Jetty 9.4.44.v20210927  
-
-### Development Tools  
-- IDE: IntelliJ IDEA  
-
-## Core Features  
-1. **User Roles and Authentication**  
-   Supports dual roles (reader and administrator). Implements login authentication, session management, and permission differentiation via `ReaderCard` to ensure system access security.  
-
-2. **Reader Information Management**  
-   - Reader Information CRUD: Includes adding, querying, editing (name, gender, birthdate, etc.), and deleting reader information, implemented through `ReaderInfoService` and `ReaderInfoDao`.  
-   - Reader Card Management: Creates reader cards associated with reader information, supporting functions such as password modification (`updatePasswd`) and name updates (`updateName`).  
-
-3. **Book Information Management**  
-   Supports detailed book queries (displayed on the reader-side book details page via `BookController`), providing foundational data for borrowing functions.  
-
-## Project Structure  
-bookmanage  
-├── src/main/java/com/book  
-│ ├── domain // Entity classes (ReaderInfo, ReaderCard, Book, etc.)  
-│ ├── dao // Data access layer interfaces (ReaderInfoDao, etc., mapped with MyBatis)  
-│ ├── service // Business logic layer interfaces and implementations (ReaderInfoService, ReaderCardService, etc.)  
-│ ├── controller // Controller layer (ReaderController, LoginController, BookController, etc., handling HTTP requests)  
-│ └── command // Command objects (e.g., BookAddCommand, for data transformation)  
-├── src/main/resources  
-│ └── mapper // MyBatis mapping files (ReaderInfoMapper.xml, etc.)  
-├── src/main/webapp // Frontend resources (JSP views, static assets, etc.)  
-├── pom.xml // Maven dependency configuration  
-└── Configuration Files // IDE configurations, encoding settings, etc.  
-
-
-
-## Key Module Descriptions  
-1. **Reader Information Module**  
-   - Entity Class `ReaderInfo`: Encapsulates basic reader information (ID, name, gender, birthdate, contact details, etc.) and borrowing limits (borrowable quantity, borrowed quantity).  
-   - Service Layer `ReaderInfoServiceImpl`: Implements business logic for CRUD operations on reader information, relying on `ReaderInfoDao` for database interactions.  
-   - Controller Layer `ReaderController`: Handles HTTP requests related to reader information (list display, adding, editing, deleting, etc.), coordinating frontend views and backend data interactions, including logic such as date format validation.  
-
-2. **Reader Card Module**  
-   - Entity Class `ReaderCard`: Stores reader login credentials (ID, password, role) and links to basic reader information.  
-   - Service Layer `ReaderCardServiceImpl`: Implements functions such as reader card creation, password modification, and name synchronization, ensuring consistency between reader information and login details.  
-
-3. **Data Persistence Layer**  
-   Defines SQL statements via MyBatis mapping files (e.g., `ReaderInfoMapper.xml`), enabling entity-to-database table mapping and supporting efficient data operations.
-
-
 # 图书管理系统
 
 ## 项目概述
@@ -129,3 +64,67 @@ bookmanage
 3. **数据持久层**  
    通过MyBatis映射文件（如`ReaderInfoMapper.xml`）定义SQL语句，实现实体类与数据库表的映射，支持高效数据操作。
 
+
+# bookmanage  
+
+## Project Overview  
+bookmanage is a digital library management platform developed based on the Java Web technology stack. It primarily implements information management for library users (readers and administrators), book information queries, and borrowing-related functions, aiming to enhance library operational efficiency and user experience through informatization.  
+
+## Technology Stack  
+### Backend Technologies  
+- Core Framework: Spring Framework (Spring Core, Spring MVC, Spring Tx, Spring JDBC)  
+- Persistence Layer: MyBatis 3.5.9 (integrated with MyBatis-Spring)  
+- Programming Language: Java 8  
+- Database: MySQL 8.0.28 (connection pool management via commons-dbcp2 2.9.0)  
+- Build Tool: Maven  
+- AOP Support: AspectJ 1.9.7  
+- Testing Framework: TestNG 7.5  
+
+### Frontend Technologies  
+- View Layer: JSP, JSTL 1.2  
+- Styling Framework: Bootstrap, font-awesome  
+- Scripting: JavaScript (ES6)  
+- Servers: Tomcat 9.0.24, Jetty 9.4.44.v20210927  
+
+### Development Tools  
+- IDE: IntelliJ IDEA  
+
+## Core Features  
+1. **User Roles and Authentication**  
+   Supports dual roles (reader and administrator). Implements login authentication, session management, and permission differentiation via `ReaderCard` to ensure system access security.  
+
+2. **Reader Information Management**  
+   - Reader Information CRUD: Includes adding, querying, editing (name, gender, birthdate, etc.), and deleting reader information, implemented through `ReaderInfoService` and `ReaderInfoDao`.  
+   - Reader Card Management: Creates reader cards associated with reader information, supporting functions such as password modification (`updatePasswd`) and name updates (`updateName`).  
+
+3. **Book Information Management**  
+   Supports detailed book queries (displayed on the reader-side book details page via `BookController`), providing foundational data for borrowing functions.  
+
+## Project Structure  
+bookmanage  
+├── src/main/java/com/book  
+│ ├── domain // Entity classes (ReaderInfo, ReaderCard, Book, etc.)  
+│ ├── dao // Data access layer interfaces (ReaderInfoDao, etc., mapped with MyBatis)  
+│ ├── service // Business logic layer interfaces and implementations (ReaderInfoService, ReaderCardService, etc.)  
+│ ├── controller // Controller layer (ReaderController, LoginController, BookController, etc., handling HTTP requests)  
+│ └── command // Command objects (e.g., BookAddCommand, for data transformation)  
+├── src/main/resources  
+│ └── mapper // MyBatis mapping files (ReaderInfoMapper.xml, etc.)  
+├── src/main/webapp // Frontend resources (JSP views, static assets, etc.)  
+├── pom.xml // Maven dependency configuration  
+└── Configuration Files // IDE configurations, encoding settings, etc.  
+
+
+
+## Key Module Descriptions  
+1. **Reader Information Module**  
+   - Entity Class `ReaderInfo`: Encapsulates basic reader information (ID, name, gender, birthdate, contact details, etc.) and borrowing limits (borrowable quantity, borrowed quantity).  
+   - Service Layer `ReaderInfoServiceImpl`: Implements business logic for CRUD operations on reader information, relying on `ReaderInfoDao` for database interactions.  
+   - Controller Layer `ReaderController`: Handles HTTP requests related to reader information (list display, adding, editing, deleting, etc.), coordinating frontend views and backend data interactions, including logic such as date format validation.  
+
+2. **Reader Card Module**  
+   - Entity Class `ReaderCard`: Stores reader login credentials (ID, password, role) and links to basic reader information.  
+   - Service Layer `ReaderCardServiceImpl`: Implements functions such as reader card creation, password modification, and name synchronization, ensuring consistency between reader information and login details.  
+
+3. **Data Persistence Layer**  
+   Defines SQL statements via MyBatis mapping files (e.g., `ReaderInfoMapper.xml`), enabling entity-to-database table mapping and supporting efficient data operations.
